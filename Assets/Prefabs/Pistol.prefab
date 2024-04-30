@@ -49,7 +49,8 @@ MonoBehaviour:
   <BulletPrefab>k__BackingField: {fileID: 1309542652257023414, guid: 0855dff026816bd4bbe1b293f8b12ae9, type: 3}
   <ShootRadius>k__BackingField: 5
   <ShootFrequencySec>k__BackingField: 1
-  _bulletMaxFlyDistance: 30
+  _damage: 1
+  _bulletMaxFlyDistance: 10
   _bulletFlySpeed: 10
   _bulletSpawnPosition: {fileID: 5352035885360059596}
 --- !u!1 &4254759627745325834

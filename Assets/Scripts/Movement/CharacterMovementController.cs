@@ -12,6 +12,8 @@ namespace LearnGame.Movement
         [SerializeField]
         private float _speed = 1f;
         [SerializeField]
+        private float _accelerationTimes = 1.5f;
+        [SerializeField]
         private float _maxRadiansDelta = 10f;
         public Vector3 MovementDirection { get; set; }
         public Vector3 LookDirection { get; set; }
@@ -24,16 +26,20 @@ namespace LearnGame.Movement
 
         protected void Update()
         {
-            Translate();
+            Translate(Input.GetKey(KeyCode.Space));
 
             if(_maxRadiansDelta > 0 && LookDirection != Vector3.zero)
             {
                 Rotate();
             }
         }
-        private void Translate()
+        private void Translate(bool acceleration)
         {
-            var delta = MovementDirection * _speed * Time.deltaTime;
+            float speed = _speed;
+            if (acceleration) {
+                speed = _speed * _accelerationTimes;
+            }
+            var delta = MovementDirection * speed * Time.deltaTime;
             _characterController.Move(delta);
         }
         private void Rotate()
