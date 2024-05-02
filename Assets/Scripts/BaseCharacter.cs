@@ -55,7 +55,16 @@ namespace LearnGame
                 Destroy(other.gameObject);
             } else if (LayerUtils.IsPickUp(other.gameObject))
             {
-                var pickUp = other.gameObject.GetComponent<PickUpWeapon>();
+                Debug.Log(other.gameObject);
+                var pickUpType = other.gameObject.GetComponent<PickUpItem>()._type;
+                var pickUp = other.gameObject.GetComponent<PickUpItem>();
+                if(pickUpType == "weapon")
+                {
+                    pickUp = other.gameObject.GetComponent<PickUpWeapon>();
+                } else if (pickUpType == "speedboost")
+                {
+                    pickUp = other.gameObject.GetComponent<PickUpSpeedBoost>();
+                }
                 pickUp.PickUp(this);
 
                 Destroy(other.gameObject);
@@ -65,6 +74,11 @@ namespace LearnGame
         public void SetWeapon(Weapon weapon)
         {
             _shootingController.SetWeapon(weapon, _hand);
+        }
+
+        public void SetSpeed(float speed, int timer)
+        {
+            _characterMovementController.Speed(speed, timer);
         }
     }
 }

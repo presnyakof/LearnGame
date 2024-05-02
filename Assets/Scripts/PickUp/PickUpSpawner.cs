@@ -16,9 +16,13 @@ namespace LearnGame.PickUp
         private int _maxCount = 2;
 
         [SerializeField]
-        private float _spawnIntervalSeconds = 10f;
+        private float _minspawnIntervalSeconds = 10f;
+
+        [SerializeField]
+        private float _maxspawnIntervalSeconds = 15f;
 
         private float _currentSpawnTimerSeconds;
+        private float _spawnIntervalSeconds = 0;
         private int _currentCount;
         
         protected void Update()
@@ -30,6 +34,7 @@ namespace LearnGame.PickUp
                 {
                     _currentSpawnTimerSeconds = 0f;
                     _currentCount++;
+                    _spawnIntervalSeconds = Random.Range(_minspawnIntervalSeconds, _maxspawnIntervalSeconds);
 
                     var randomPointInsideRange = Random.insideUnitCircle * _range;
                     var randomPosition = new Vector3(randomPointInsideRange.x, 0f, randomPointInsideRange.y) + transform.position;

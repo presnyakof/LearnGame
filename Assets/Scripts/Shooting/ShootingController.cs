@@ -52,7 +52,6 @@ namespace LearnGame.Shooting
             var position = _weapon.transform.position;
             var radius = _weapon.ShootRadius;
             var mask = LayerUtils.EnemyMask;
-            Debug.Log(LayerUtils.EnemyMask + " " + LayerMask.NameToLayer("Enemy"));
             if (gameObject.layer == LayerMask.NameToLayer(LayerUtils.EnemyLayerName)) {
                 mask = LayerUtils.PlayerMask;
             }

@@ -18,6 +18,10 @@ namespace LearnGame.Movement
         public Vector3 MovementDirection { get; set; }
         public Vector3 LookDirection { get; set; }
         private CharacterController _characterController;
+        private float _timer; // сколько буст действует
+        private float _time; // сколько прошло
+        private bool _boosted;
+        private float _boostedSpeed;
 
         protected void Awake()
         {
@@ -28,6 +32,17 @@ namespace LearnGame.Movement
         {
             Translate(Input.GetKey(KeyCode.Space));
 
+            if(_boosted)
+            {
+                _time += Time.deltaTime;
+                if (_time > _timer)
+                {
+                    _boosted = false;
+                    _time = 0;
+                }
+            }
+
+
             if(_maxRadiansDelta > 0 && LookDirection != Vector3.zero)
             {
                 Rotate();
@@ -36,7 +51,10 @@ namespace LearnGame.Movement
         private void Translate(bool acceleration)
         {
             float speed = _speed;
-            if (acceleration) {
+            if (_boosted) {
+                speed = _boostedSpeed;
+            } else if (acceleration)
+            {
                 speed = _speed * _accelerationTimes;
             }
             var delta = MovementDirection * speed * Time.deltaTime;
@@ -56,6 +74,16 @@ namespace LearnGame.Movement
 
                 transform.rotation = newRotation;
             }
+        }
+
+        public void Speed(float speed, int timer = 0)
+        {
+            if (timer > 0)
+            {
+                _boosted = true;
+                _timer = timer;
+            }
+            _boostedSpeed = _speed * speed;
         }
     }
 }

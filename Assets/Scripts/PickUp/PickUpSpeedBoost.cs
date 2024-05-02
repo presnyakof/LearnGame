@@ -3,20 +3,18 @@ using UnityEngine;
 
 namespace LearnGame.PickUp
 {
-    public class PickUpWeapon : PickUpItem
+    public class PickUpSpeedBoost : PickUpItem
     {
         [SerializeField]
-        private Weapon _WeaponPrefab;
+        public float _multiplier = 1.5f;
 
-        public void Awake()
-        {
-            base._type = "weapon";
-        }
+        [SerializeField]
+        public int _timer = 3;
 
         public override void PickUp(BaseCharacter character)
         {
             base.PickUp(character);
-            character.SetWeapon(_WeaponPrefab);
+            character.SetSpeed(_multiplier, _timer);
         }
     }
 }
