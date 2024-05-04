@@ -51,10 +51,7 @@ namespace LearnGame.Shooting
 
             var position = _weapon.transform.position;
             var radius = _weapon.ShootRadius;
-            var mask = LayerUtils.EnemyMask;
-            if (gameObject.layer == LayerMask.NameToLayer(LayerUtils.EnemyLayerName)) {
-                mask = LayerUtils.PlayerMask;
-            }
+            var mask = LayerUtils.CharactersMask;
 
             var size = Physics.OverlapSphereNonAlloc(position, radius, _colliders, mask);
             if(size > 0)
