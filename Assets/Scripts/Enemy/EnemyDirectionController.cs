@@ -10,7 +10,7 @@ namespace LearnGame.Enemy
         public void UpdateMovementDirection(Vector3 targetPosition)
         {
             var realDirection = targetPosition - transform.position;
-            MovementDirection = new Vector3(realDirection.x, 0, realDirection.z).normalized; //direction.normalized;
+            MovementDirection = new Vector3(realDirection.x, 0f, realDirection.z).normalized; //direction.normalized;
         }
     }
 }

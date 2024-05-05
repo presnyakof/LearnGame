@@ -18,6 +18,8 @@ namespace LearnGame
 
         public static readonly int PickUpLayer = LayerMask.NameToLayer(PickUpLayerName);
 
+        public static readonly int PlayerLayer = LayerMask.NameToLayer(PickUpLayerName);
+
         public static readonly int EnemyMask = LayerMask.GetMask(EnemyLayerName);
 
         public static readonly int PlayerMask = LayerMask.GetMask(PlayerLayerName);

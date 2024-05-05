@@ -12,7 +12,7 @@ namespace LearnGame.Movement
         [SerializeField]
         private float _speed = 1f;
         [SerializeField]
-        private float _accelerationTimes = 1.5f;
+        private float _accelerationTimes { get; set; } = 1.5f;
         [SerializeField]
         private float _maxRadiansDelta = 10f;
         public Vector3 MovementDirection { get; set; }
@@ -30,32 +30,26 @@ namespace LearnGame.Movement
 
         protected void Update()
         {
-            Translate(Input.GetKey(KeyCode.Space));
-
-            if(_boosted)
-            {
-                _time += Time.deltaTime;
-                if (_time > _timer)
-                {
-                    _boosted = false;
-                    _time = 0;
-                }
-            }
-
-
+            Translate();
             if(_maxRadiansDelta > 0 && LookDirection != Vector3.zero)
             {
                 Rotate();
             }
         }
-        private void Translate(bool acceleration)
+        private void Translate()
         {
             float speed = _speed;
-            if (_boosted) {
-                speed = _boostedSpeed;
-            } else if (acceleration)
+            //Debug.Log("_boosted : " + _boosted + "; _timer : " + _timer + "; _time = " + _time + "; _boostedSpeed : " + _boostedSpeed);
+            if (_boosted && _timer > 0 && _time > _timer) {
+                //speed = _boostedSpeed;
+                _boosted = false;
+                _timer = 0;
+                _time = 0;
+            } else 
+            if (_boosted && (_time <= _timer || _timer == 0))
             {
-                speed = _speed * _accelerationTimes;
+                speed = _boostedSpeed;
+                _time += Time.deltaTime;
             }
             var delta = MovementDirection * speed * Time.deltaTime;
             _characterController.Move(delta);
@@ -63,6 +57,7 @@ namespace LearnGame.Movement
         private void Rotate()
         {
             var currentLookDirection = transform.rotation * Vector3.forward;
+
             float sqrMagnitude = (currentLookDirection - LookDirection).sqrMagnitude;
 
             if(sqrMagnitude > SqrEpsilon)
@@ -82,8 +77,26 @@ namespace LearnGame.Movement
             {
                 _boosted = true;
                 _timer = timer;
+                _time = 0;
+                _boostedSpeed = _speed * speed;
+                Debug.Log("_boosted : " + _boosted + "; _timer : " + _timer + "; _time = " + _time + "; _boostedSpeed : " + _boostedSpeed);
             }
-            _boostedSpeed = _speed * speed;
+        }
+
+        public void permSpeed (float speedx = -1, bool enabled = true)
+        {
+            if (!enabled && !_boosted)
+            {
+                _boosted = true;
+                if (speedx == -1) 
+                    _boostedSpeed = _accelerationTimes * _speed;
+                else
+                    _boostedSpeed = _speed * speedx;
+            } else if (_timer == 0)
+            {
+                _boosted = false;
+                _boostedSpeed = _speed;
+            }
         }
     }
 }

@@ -12,19 +12,28 @@ namespace LearnGame.Enemy
 
         private readonly PlayerCharacter _player;
 
-        private readonly Collider[] _colliders = new Collider[10];
+        private readonly Collider[] _colliders = new Collider[100];
         public EnemyTarget(Transform agent, PlayerCharacter player, float viewRadius)
         {
             _agentTransform = agent;
             _player = player;
             _viewRadius = viewRadius;
         } 
-        public void FindClosest()
+        public void FindClosest(bool hasDefaultWeapon)
         {
             float minDistance = float.MaxValue;
+            int count;
 
-            var count = FindAllTargets(LayerUtils.PickUpsMask | LayerUtils.CharactersMask);
-
+            if(hasDefaultWeapon)
+            {
+                count = FindAllTargets(LayerUtils.PickUpsMask);
+            } else if(_colliders.Length == 0)
+            {
+                count = FindAllTargets(LayerUtils.PickUpsMask);
+            } else
+            {
+                count = FindAllTargets(LayerUtils.CharactersMask);
+            }
             for (int i = 0; i < count; i++)
             {
                 var go = _colliders[i].gameObject;
@@ -38,7 +47,7 @@ namespace LearnGame.Enemy
                 }
             }
 
-            if(_player != null && DistanceFromAgentTo(_player.gameObject) < minDistance) Closest = _player.gameObject;
+            if(_player != null && DistanceFromAgentTo(_player.gameObject) < minDistance && !hasDefaultWeapon) Closest = _player.gameObject;
         }
 
         public float DistanceToClosestFromAgent()
@@ -51,8 +60,7 @@ namespace LearnGame.Enemy
 
         private int FindAllTargets(int layerMask)
         {
-            var size = Physics.OverlapSphereNonAlloc(
-                _agentTransform.position, _viewRadius, _colliders, layerMask);
+            var size = Physics.OverlapSphereNonAlloc(_agentTransform.position, _viewRadius, _colliders, layerMask);
             return size;
         }
 

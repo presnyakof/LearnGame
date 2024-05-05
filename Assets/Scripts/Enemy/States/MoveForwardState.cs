@@ -1,5 +1,7 @@
 ﻿using LearnGame.FSM;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace LearnGame.Enemy.States
 {
@@ -14,16 +16,20 @@ namespace LearnGame.Enemy.States
         {
             _target = target;
             _enemyDirectionController = enemyDirectionController;
+            StateID = "forward";
         }
 
         public override void Execute()
         {
-            Vector3 targetPosition = _target.Closest.transform.position;
+            if(_target.Closest != null)
+            { 
+                Vector3 targetPosition = _target.Closest.transform.position;
 
-            if(_currentPoint != targetPosition )
-            {
-                _currentPoint = targetPosition;
-                _enemyDirectionController.UpdateMovementDirection(targetPosition);
+                if(_currentPoint != targetPosition )
+                {
+                    _currentPoint = targetPosition;
+                    _enemyDirectionController.UpdateMovementDirection(targetPosition);
+                }
             }
         }
     }

@@ -11,6 +11,10 @@ namespace LearnGame.PickUp
         [SerializeField]
         public int _timer = 3;
 
+        public void Awake()
+        {
+            base._type = "boost";
+        }
         public override void PickUp(BaseCharacter character)
         {
             base.PickUp(character);

@@ -19,6 +19,7 @@ namespace LearnGame.Enemy.States
             _target = target;
             _navMesher = navMesher;
             _enemyDirectionController = enemyDirectionController;
+            StateID = "find";
         }
 
         public override void Execute()

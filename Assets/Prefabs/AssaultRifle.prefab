@@ -302,7 +302,7 @@ MonoBehaviour:
   <ShootFrequencySec>k__BackingField: 0.2
   _damage: 0.5
   _bulletMaxFlyDistance: 20
-  _bulletFlySpeed: 10
+  _bulletFlySpeed: 15
   _bulletSpawnPosition: {fileID: 8628588440845104801}
 --- !u!1 &8488636947008115810
 GameObject:

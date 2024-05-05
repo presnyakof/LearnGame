@@ -10,10 +10,14 @@ namespace LearnGame.Camera
         [SerializeField]
         private Vector3 _followCameraOffset = Vector3.zero;
 
-        [SerializeField]
         private PlayerCharacter _player;
 
-        protected void Awake()
+        public void setPlayer(PlayerCharacter player)
+        {
+            _player = player;
+        }
+
+        protected void Start()
         {
             if( _player == null)
             {
