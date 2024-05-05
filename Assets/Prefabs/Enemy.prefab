@@ -266,7 +266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
-  _accelerationTimes: 1.5
   _maxRadiansDelta: 10
 --- !u!114 &-5804860139061531631
 MonoBehaviour:
@@ -322,4 +321,4 @@ MonoBehaviour:
   _viewRadius: 100
   _minHPPercent: 70
   _escapeChance: 70
-  _escapingSpeedMultiplier: 2
+  _escapingSpeedMultiplier: 1.5

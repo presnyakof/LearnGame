@@ -737,7 +737,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 1399129768130799929, guid: fd8c315f4c9bf494b8a6dd80876a0816, type: 3}
   _playerPrefab: {fileID: 7091502598863988199, guid: 0a19f7c3abbc8924b88bc6316d20b965, type: 3}
   _range: 2
-  _maxCountCharactersOnMap: 1
+  _maxCountCharactersOnMap: 5
   _minspawnIntervalSeconds: 1
   _maxspawnIntervalSeconds: 5
 --- !u!1 &1282976665
@@ -772,7 +772,7 @@ MonoBehaviour:
   _enemyPrefab: {fileID: 1399129768130799929, guid: fd8c315f4c9bf494b8a6dd80876a0816, type: 3}
   _playerPrefab: {fileID: 7091502598863988199, guid: 0a19f7c3abbc8924b88bc6316d20b965, type: 3}
   _range: 2
-  _maxCountCharactersOnMap: 1
+  _maxCountCharactersOnMap: 5
   _minspawnIntervalSeconds: 1
   _maxspawnIntervalSeconds: 5
 --- !u!4 &1282976667
