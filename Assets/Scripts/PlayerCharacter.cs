@@ -8,5 +8,6 @@ namespace LearnGame
     public class PlayerCharacter : BaseCharacter
     {
 
+
     }
 }
